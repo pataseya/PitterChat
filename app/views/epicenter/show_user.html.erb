@@ -1,0 +1,58 @@
+<h1> @<%= @user.username %>'s Profile and Pweets</h1>
+<div class="container">
+<div class="row">
+<div class="col-sm-3">
+<div class="card text-white bg-warning mb-3 text-center" style="max-width: 18rem;">
+	<p><%= image_tag @user.avatar.url, size:180, class: "user-pic-nav" %> </p>
+	<% if current_user.following.include?(@user.id) %>
+		<p align='center'><%= link_to "Following", unfollow_path(id: @user.id), class: "btn btn-primary", id: "unfollow_btn" %></p>
+	<% else %>
+		<% if current_user.id != @user.id %>
+			<p align='center'><%= link_to "Follow", now_following_path(id: @user.id), class: "btn btn-primary" %></p>
+		<% end %>
+	<% end %>
+	 <div class="card-body">
+		<h5 class="card-title"><strong><%= @user.name %></strong></h5>
+		<h4 class="card-title">@<%= @user.username %></h4>
+		<p class="card-text">Owner:<%= @user.location%><br/><%= @user.bio %></p>
+		<%= link_to "Followers", followers_path(id: @user.id), class: "btn btn-default" %>
+		<%= link_to "Following", following_path(id: @user.id), class: "btn btn-default" %>
+
+			<table>
+				<thead>
+					<tr>
+						<th>Pweets</th>
+						<th>Following</th>
+						<th>Followers</th>
+					</tr>
+				</thead>
+				</tbody>
+					<tr>
+						<td align='center'><%= @totaltweets_array.count %></td>
+						<td align='center'><%= @userfollowing %></td>
+						<td align='center'><%= @userfollowers %></td>
+					</tr>
+				</body>
+			</table>
+	</div>	
+</div>   
+
+ </div>
+   <div class="col-sm-9">
+     <h2>@<%= @user.username %>'s Pitter Chatter</h2>   	
+	<% @user.tweets.reverse.each do |tweet| %>
+     	<div class="panel panel-default">
+ 	 		<div class="panel-heading"><em>Posted <%= time_ago_in_words(tweet.created_at) %>&nbspago</em></div>
+ 	 		<div class="panel-body">
+ 	 			<%= tweet.message.html_safe %></div>
+
+ 		</div>
+ 	 <%end %>		
+	</div>
+ </div>
+</div>
+
+
+
+
+

@@ -1,0 +1,23 @@
+<div>
+    <h1>Chatter about <%= @tag.phrase %></h1>
+</div>
+
+<div class="well">
+<div class="row">
+    
+    <div>
+        <% @tag.tweets.order(created_at: :desc).each do |tweet| %>
+        <p>
+            <%= image_tag tweet.user.avatar.url, size:25, class: "tweeter-pic-nav" %> 
+            <%= tweet.user.name %> <%= "@#{tweet.user.username}" %>
+            • <%= time_ago_in_words(tweet.created_at) %> ago
+        </p>
+        
+            <p>&nbsp&nbsp&nbsp&nbsp
+                <%= tweet.message.html_safe %>
+            </p>
+            <hr>
+    <% end %>
+    </div>
+</div>
+</div>

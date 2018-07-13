@@ -1,0 +1,28 @@
+<%= form_with(model: tweet, local: true) do |form| %>
+  <% if tweet.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(tweet.errors.count, "error") %> prohibited this tweet from being saved:</h2>
+
+      <ul>
+      <% tweet.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<!-- you could also use 
+-->
+  <div class="field">
+    <%= form.label :Pweet %><br />
+    <%= form.text_area :message %>
+  </div>
+<!-- we don't want user id to show but still need to capture it for every new tweet so we make it hidden -->
+  <div class="field">  
+    <%= form.hidden_field :user_id, value: current_user.id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "Pweet It!", class: "btn btn-primary" %>
+  </div>
+<% end %>

@@ -1,0 +1,52 @@
+
+  <div class="row">
+   <div class="col-sm-3"> 
+ 		<div class="card text-white bg-warning mb-3 text-center" style="max-width: 25rem;">
+      <h3 class="card-header"><%= current_user.name %></h3>
+     <img class="card-img-top">
+  		<%= image_tag current_user.avatar.url, size:180, class: "user-pic-nav" %> 
+            <h4 class="card-title">@<%= current_user.username %></h4>
+            <div class="card-body">     					
+              <table align='center'>
+    						<thead>
+    							<tr>
+    								<th>Pweets</th>
+    								<th>Following</th>
+    								<th>Followers</th>
+    							</tr>
+    						</thead>
+    						</tbody>
+    							<tr>
+    								<td><%= @currusertweets_array.count %></td>
+    								<td><%= @curruserfollowing %></td>
+    								<td><%= @followers %></td>
+    							</tr>
+    						</body>
+    					</table>
+  			</div>
+		</div>   
+    </div> 
+    <div class="col-sm-9">
+      <h2>@<%= current_user.username %>'s Chattter Feed</h2>       
+      <div class="well">
+	
+		<% @following_tweets.reverse.each do |tweet| %>
+     		
+          <div class="panel panel-default">
+ 	 			    <div class="panel-heading">
+ 	 				     <%= image_tag tweet.user.avatar.url, size:25, class: "tweeter-pic-nav" %> 
+ 	 				     @<%= link_to tweet.user.username, show_user_path(id: tweet.user.id) %>&nbsp&nbsp 
+                <em>Posted <%= time_ago_in_words(tweet.created_at) %>&nbspago</em>
+ 	 					
+ 	 				 </div>
+ 	 			  <div class="panel-body"><%= tweet.message.html_safe %></div>
+        </div>
+		
+		<% end %>
+
+      </div>
+    </div>
+  </div>
+
+
+
