@@ -11,6 +11,9 @@ gem 'carrierwave'
 gem 'bootstrap-sass'
 gem 'font-awesome-rails'
 gem 'kaminari'
+gem 'paperclip'
+
+gem 'aws-sdk-s3', '~> 1.0.0.rc2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.6'
@@ -64,7 +67,7 @@ end
 
 group :production do
   gem 'pg'
-
+  gem 'rails_12factor'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
